@@ -43,7 +43,7 @@ describe('calculator', function () {
   })
 
   it('it can chain multiple operations together', function(){
-    calculator.previousTotal = 0;
+    calculator.runningTotal = 0;
     calculator.numberClick(5);
     calculator.operatorClick('+');
     calculator.numberClick(5);
@@ -52,12 +52,14 @@ describe('calculator', function () {
   })
 
   it('it can clear the running total without affecting the calculation', function() {
-    calculator.previousTotal = 0;
-    calculator.clearClick();
+    calculator.runningTotal = 0;
     calculator.numberClick(5);
     calculator.operatorClick('-');
     calculator.numberClick(2);
+    calculator.operatorClick('-');
+    calculator.clearClick();
+    calculator.numberClick(1)
     calculator.operatorClick('=');
-    assert.strictEqual(calculator.runningTotal, 3);
+    assert.strictEqual(calculator.runningTotal, 2);
   })
 });
